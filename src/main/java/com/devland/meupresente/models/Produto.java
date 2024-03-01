@@ -13,7 +13,9 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Lob;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 
 
@@ -31,11 +33,17 @@ public class Produto {
 	@Lob
 	@Column(columnDefinition = "TEXT")
 	private String linkLojaProduct;	
-	
-	@JsonIgnore
-	@OneToMany(mappedBy = "produto")
-	Set<ListHasProduct> listhasproduct;
+	private boolean assinado;
+	private String nomeAssinador;
 	
 	
+	@ManyToOne(optional = false)
+	@JoinColumn(name = "id_list", nullable = false, updatable = false)
+	private ListaPresente listaPresente;
+	
+	public Long getListaPresente() {
+		
+		return listaPresente.getIdList();
+	}
 
 }

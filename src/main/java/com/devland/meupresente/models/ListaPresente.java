@@ -1,7 +1,11 @@
 package com.devland.meupresente.models;
 
 
+import java.util.List;
 import java.util.Set;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Data;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -30,10 +34,18 @@ public class ListaPresente {
 		return usuario.getIdUser();
 	}
 	
-
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "listaPresente")
-	Set<ListHasProduct> listhasproduct;
+	private List<Produto> produtos;
+	
+	@JsonIgnore
+	public List<Produto> getProdutos()
+	{
+		return produtos;
+	}
+	
+
 	
 	
 }
